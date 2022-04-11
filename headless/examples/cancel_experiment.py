@@ -29,9 +29,13 @@ def main():
     args = parser.parse_args()
     if args.cmp1 and args.cmp2 and args.cmp1 > args.cmp2:
         sys.exit(
-            '--cmp1={} --cmp2={} invalid, --cmp1 is the baseline'.format(args.cmp1, args.cmp2))
-    print('Simulating {} hours of data/system/{}/{}/scenarios/{}/weekday.bin'.format(
-        args.hours, args.country_code, args.city_name, args.map_name))
+            f'--cmp1={args.cmp1} --cmp2={args.cmp2} invalid, --cmp1 is the baseline'
+        )
+
+    print(
+        f'Simulating {args.hours} hours of data/system/{args.country_code}/{args.city_name}/scenarios/{args.map_name}/weekday.bin'
+    )
+
     print('')
 
     num_succeeded_last = 0
@@ -54,8 +58,7 @@ def main():
             results2 = results
         if args.cmp1 == pct:
             print('')
-            print('Baseline cancelled {}%, experimental cancelled {}%'.format(
-                args.cmp1, args.cmp2))
+            print(f'Baseline cancelled {args.cmp1}%, experimental cancelled {args.cmp2}%')
             results.compare(results, results2)
             print('')
 
